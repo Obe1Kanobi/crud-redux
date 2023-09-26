@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { ProductModel } from "./models/product.model";
+import {
+  Photo,
+  PhotoCont,
+  CardCont,
+  Pechka,
+  UlStyle,
+  TitleStyle,
+  LiStyle,
+} from "./App.style";
 
-function App() {
+import { PRODUCTS_URL } from "./constants/api.constants";
+
+export function App() {
+  const [products, setProducts] = useState<ProductModel[]>([]);
+
+  useEffect(() => {
+    fetch(PRODUCTS_URL)
+      .then((res) => res.json())
+      .then((data: ProductModel[]) => setProducts(data));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Grocery list</h1>
+      <UlStyle>
+        {products.map((product) => (
+          <LiStyle key={product.id}>
+            <TitleStyle>{product.title}</TitleStyle>
+            <CardCont>
+              <PhotoCont>
+                <Photo src={product.image} alt={product.title} />
+              </PhotoCont>
+              <Pechka>
+                <p>Description: "{product.description}"</p>
+                <p>Price: ${product.price}</p>
+              </Pechka>
+            </CardCont>
+            <p>Category: {product.category}</p>
+            {typeof product.rating === "object" ? (
+              <div>
+                <p>Rating: {product.rating.rate}</p>
+                <p>Number of ratings: {product.rating.count}</p>
+              </div>
+            ) : (
+              <p>Rating: {product.rating}</p>
+            )}
+          </LiStyle>
+        ))}
+      </UlStyle>
     </div>
   );
 }
-
-export default App;
