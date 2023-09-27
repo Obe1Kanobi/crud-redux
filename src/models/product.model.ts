@@ -6,5 +6,4 @@ export type ProductModel = {
   category: string;
   image: string;
   rating: number | string | { rate: number; count: number };
-  products: ProductModel[];
 };
