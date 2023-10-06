@@ -6,9 +6,10 @@ import { ProductModel } from "../../../models/product.model";
 export default function ProductList(props: { products: ProductModel[] }) {
   return (
     <UlStyle>
-      {props.products.map((product) => (
-        <ProductCard key={product.id} {...product} />
-      ))}
+      {props.products &&
+        props.products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
     </UlStyle>
   );
 }

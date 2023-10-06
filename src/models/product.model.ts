@@ -1,3 +1,5 @@
+import { ProductStateModel } from "./state/product-state.model";
+
 export type ProductModel = {
   id: number;
   title: string;

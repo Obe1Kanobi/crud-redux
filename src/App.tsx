@@ -1,13 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { ProductModel } from "./models/product.model";
-import { PRODUCTS_URL } from "./constants/api.constants";
+import React from "react";
 import ProductListCont from "./components/product/list/product-list.container";
+import ProductList from "./components/product/list/product-list.component";
 
 export function App() {
   return (
     <div>
       <h1>Grocery list</h1>
-      <ProductListCont />
+      <ProductListCont
+        render={(products, loading, error) => (
+          <>
+            {loading ? (
+              <div>Loading...</div>
+            ) : error ? (
+              <div>{error}</div>
+            ) : (
+              <ProductList products={products} />
+            )}
+          </>
+        )}
+      />
     </div>
   );
 }

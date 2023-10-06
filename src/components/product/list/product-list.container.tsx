@@ -1,18 +1,25 @@
-import { ProductModel } from "../../../models/product.model";
-import { useState, useEffect } from "react";
 import React from "react";
-import ProductList from "./product-list.component";
-import axios from "axios";
-import { PRODUCTS_URL } from "../../../constants/api.constants";
+import { ProductModel } from "../../../models/product.model";
+import { useProducts } from "../../../product.hook";
 
-export default function ProductListCont() {
-  const [products, setProducts] = useState<ProductModel[]>([]);
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+function ProductListCont({
+  render,
+}: {
+  render: (
+    products: ProductModel[],
+    loading: boolean,
+    error: string | null
+  ) => JSX.Element;
+}) {
+  // используем хук useProducts для получения данных
+  const { products, loading, error } = useProducts() as {
+    products: ProductModel[];
+    loading: boolean;
+    error: string | null;
+  };
 
-  async function fetchProducts() {
-    axios(PRODUCTS_URL).then((res) => setProducts(res.data));
-  }
-  return <ProductList products={products} />;
+  // Вызовите функцию render, передав ей полученные данные
+  return render(products, loading, error);
 }
+
+export default ProductListCont;

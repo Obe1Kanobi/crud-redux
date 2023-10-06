@@ -1,35 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { ProductModel } from "../../models/product.model";
+import { ProductStateModel } from "../../models/state/product-state.model";
 
-export interface CounterState {
-  value: number;
-}
+export const initialState: ProductModel[] = [];
 
-const initialState: CounterState = {
-  value: 0,
-};
-
-export const counterSlice = createSlice({
-  name: "counter",
+export const productSlice = createSlice({
+  name: "product", //сам слайс, в котором мы всё описываем, его название, редусеры, начальное состояние и т.д., на выходе он нам даёт
+  // готовый экшн и готовый редусер, который мы можем поместить в стор
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    setProductsAction: (state, action: PayloadAction<ProductModel[]>) => {
+      return [...state, ...action.payload];
     },
   },
+  /// тут добавить ещё редусер, который обрабатывает асинх экшн
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+// Если делаем какой-то экшн то вносятся изменения
+export const { setProductsAction } = productSlice.actions;
 
-export default counterSlice.reducer;
+export default productSlice.reducer;
