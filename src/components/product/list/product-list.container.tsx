@@ -13,6 +13,7 @@ function ProductListCont({
 }) {
   // используем хук useProducts для получения данных
   const { products, loading, error } = useProducts() as {
+    // получаем отсюда продукты
     products: ProductModel[];
     loading: boolean;
     error: string | null;
