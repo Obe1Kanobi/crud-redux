@@ -8,6 +8,7 @@ import {
   PhotoCont,
   TitleStyle,
 } from "../../../App.style";
+import { Description } from "../Description";
 
 export const ProductCard: FC<ProductModel> = memo(
   ({ id, title, price, description, image, category, rating }) => {
@@ -19,7 +20,9 @@ export const ProductCard: FC<ProductModel> = memo(
             <Photo src={image} alt={title} />
           </PhotoCont>
           <Pechka>
-            <p>Description: "{description}"</p>
+            {/* Вставляем компоненту Description здесь */}
+            <Description text={description} maxLength={150} />
+            {/* Другие детали о продукте */}
             <p>Price: ${price}</p>
           </Pechka>
         </CardCont>

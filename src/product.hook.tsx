@@ -1,9 +1,6 @@
-import { ProductModel } from "./models/product.model";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { PRODUCTS_URL } from "./constants/api.constants";
-import ProductList from "./components/product/list/product-list.component";
-import { RootState } from "./store/store";
 import { selectProducts } from "./store/product/product.selectors";
 import { useDispatch, useSelector } from "react-redux";
 
