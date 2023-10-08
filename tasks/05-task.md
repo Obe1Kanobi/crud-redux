@@ -46,3 +46,7 @@ return <input value={innerValue} onChange={handleChange} className={innerClassNa
 7. Добавим API для создания продукта `createProductApi(product: Partial<ProductModel>)` в `product-api.service.ts`.
 8. При успешном создании продукта, нужно добавить новый продукт в стейт, так чтобы он был первым элементом.
 9. Используем созданное API в `ProductCreationContainer` на сабмит формы.
+
+![Alt text](image-2.png)
+![Alt text](image-3.png)
+![Alt text](image-4.png)

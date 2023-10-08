@@ -30,12 +30,17 @@ export const productSlice = createSlice({
       state.error = action.payload;
       state.loading = false; // Устанавливаем loading в false в случае ошибки
     },
+    setNewProduct: (state, action) => {
+      // Обработка данных о новом продукте, например, добавление его в массив продуктов
+      state.products.push(action.payload);
+    },
   },
   /// тут добавить ещё редусер, который обрабатывает асинх экшн
 });
 
 // Action creators are generated for each case reducer function
 // Если делаем какой-то экшн то вносятся изменения
-export const { setProducts, setError, setLoading } = productSlice.actions;
+export const { setProducts, setError, setLoading, setNewProduct } =
+  productSlice.actions;
 
 export default productSlice.reducer;

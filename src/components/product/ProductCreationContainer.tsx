@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Modal from "./Modal"; // Импорт компонента модального окна
 import CreateButton from "./CreateButton"; // Импорт компонента кнопки создания
 import Input from "./Input";
+import { ProductModel } from "../../models/product.model";
+import { setError } from "../../store/product/product.slice";
 
-const ProductCreationContainer: React.FC = () => {
+export const ProductCreationContainer: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false); // Состояние видимости модального окна
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -26,10 +28,25 @@ const ProductCreationContainer: React.FC = () => {
     setProductDescription(e.target.value);
   };
 
-  const handleCreateProduct = () => {
+  const handleCreateProduct = useCallback(() => {
+  if(titleInputValue) {
+  setError(false);
+  const newProduct: ProductModel = {
+    id: 21,
+    title: productName,
+    description: productDescription,
+    category: "",
+    price: 0,
+    image: "",
+    rating: {
+      count: 0,
+      rate: 0,
+    }
+  }
     // Ваши действия по созданию продукта
     // productName и productDescription содержат значения из инпутов
     // Закройте модальное окно после создания продукта
+    dispatch(setProduct)
   };
 
   return (
@@ -60,5 +77,3 @@ const ProductCreationContainer: React.FC = () => {
     </div>
   );
 };
-
-export default ProductCreationContainer;
