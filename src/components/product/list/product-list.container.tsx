@@ -1,6 +1,7 @@
 import React from "react";
 import { ProductModel } from "../../../models/product.model";
 import { useProducts } from "../../../product.hook";
+import ProductCreationContainer from "../ProductCreationContainer";
 
 function ProductListCont({
   render,
@@ -20,7 +21,13 @@ function ProductListCont({
   };
 
   // Вызовите функцию render, передав ей полученные данные
-  return render(products, loading, error);
+  return (
+    <>
+      <ProductCreationContainer />
+      {/* Рендер контейнера для создания продукта */}
+      {render(products, loading, error)}
+    </>
+  );
 }
 
 export default ProductListCont;

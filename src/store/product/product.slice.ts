@@ -3,10 +3,14 @@ import { ProductModel } from "../../models/product.model";
 
 interface ProductState {
   products: ProductModel[];
+  loading: boolean;
+  error: string | null;
 }
 
 export const initialState: ProductState = {
   products: [],
+  loading: true,
+  error: null,
 };
 
 export const productSlice = createSlice({
@@ -15,7 +19,16 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action) => {
-      return { products: action.payload };
+      state.products = action.payload;
+      state.loading = false; // Устанавливаем loading в false после успешной загрузки
+      state.error = null; // Сбрасываем error
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+      state.loading = false; // Устанавливаем loading в false в случае ошибки
     },
   },
   /// тут добавить ещё редусер, который обрабатывает асинх экшн
@@ -23,6 +36,6 @@ export const productSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 // Если делаем какой-то экшн то вносятся изменения
-export const { setProducts } = productSlice.actions;
+export const { setProducts, setError, setLoading } = productSlice.actions;
 
 export default productSlice.reducer;
