@@ -32,7 +32,7 @@ export const productSlice = createSlice({
     },
     setNewProduct: (state, action) => {
       // Обработка данных о новом продукте, например, добавление его в массив продуктов
-      state.products.push(action.payload);
+      state.products.unshift(action.payload);
     },
   },
   /// тут добавить ещё редусер, который обрабатывает асинх экшн

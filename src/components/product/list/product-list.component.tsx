@@ -1,5 +1,5 @@
 import React from "react";
-import { UlStyle } from "../../../App.style";
+import { UlStyle } from "../../../style/App.style";
 import { ProductCard } from "../card/product-card.component";
 import { ProductModel } from "../../../models/product.model";
 

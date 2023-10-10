@@ -1,7 +1,7 @@
 import React from "react";
 import { ProductModel } from "../../../models/product.model";
 import { useProducts } from "../../../product.hook";
-import ProductCreationContainer from "../ProductCreationContainer";
+import { ProductCreationContainer } from "../ProductCreationContainer";
 
 function ProductListCont({
   render,

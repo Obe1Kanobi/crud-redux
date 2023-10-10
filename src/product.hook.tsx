@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { ErrCont } from "./style/Error.style";
 import { createProductApi } from "./services/product-api.service";
+import { ProductModel } from "./models/product.model";
 
 export function useProducts() {
   // создали свой хук, который возращает нужные нам функции и объекты и отрисовывает их там куда передается, а передается он в product-list.container
@@ -38,16 +39,16 @@ export function useProducts() {
     console.log(loading);
     console.log(error);
   }
-  async function setProduct(newProductData) {
+  async function setProduct(newProductData: ProductModel) {
     try {
       const response = await createProductApi(PRODUCTS_URL, newProductData); // Используем API функцию для отправки POST-запроса
       if (response.status === 200) {
         // Если запрос успешно выполнен, обновляем состояние продуктов или выполняем другие действия
         dispatch({ type: "product/setProducts", payload: response.data });
       }
-    } catch (error) {
+    } catch (err) {
       // Обработка ошибки при отправке POST-запроса
-      console.error("Error creating product:", error);
+      console.error("Error creating product:", err);
     }
   }
   /// создать тут ещё одну async функцию

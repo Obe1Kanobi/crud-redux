@@ -1,14 +1,5 @@
 import React, { ReactNode } from "react";
-
-const modalStyle: React.CSSProperties = {
-  position: "fixed",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  padding: "20px",
-  backgroundColor: "white",
-  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)",
-};
+import { EscBut, ModTitle, ModalCont } from "../../style/Modal.style";
 
 interface ModalProps {
   visible: boolean;
@@ -19,7 +10,7 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ visible, title, onClose, children }) => {
   if (!visible) {
-    return null; // Не рендерить модальное окно, если оно скрыто
+    return null; // не рендерить модальное окно, если оно скрыто
   }
 
   const closeModal = () => {
@@ -27,17 +18,15 @@ const Modal: React.FC<ModalProps> = ({ visible, title, onClose, children }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={closeModal} style={modalStyle}>
-      <div className="modal">
-        <div className="modal-header">
-          <h2>{title}</h2>
-          <button className="modal-close" onClick={closeModal}>
-            &times;
-          </button>
-        </div>
-        <div className="modal-content">{children}</div>
+    <ModalCont className="as" onClick={closeModal}>
+      <div>
+        <ModTitle>
+          {title}
+          <EscBut onClick={closeModal}>&times;</EscBut>
+        </ModTitle>
       </div>
-    </div>
+      <div>{children}</div>
+    </ModalCont>
   );
 };
 
